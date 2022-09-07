@@ -51,3 +51,11 @@ This query should return:
 -  the employee's first and last name
 -  the name of each product
 -  and how many of that product they sold */
+select employees.EmployeeID, employees.FirstName, employees.LastName, products.Name, sum(sales.Quantity)
+from sales
+inner join employees
+on employees.EmployeeID = sales.EmployeeID
+inner join products
+on products.ProductID = sales.ProductID
+group by employees.EmployeeID, products.ProductID
+order by  sum(sales.Quantity) desc;
